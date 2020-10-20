@@ -1,18 +1,18 @@
 #!/bin/bash
 
-DIR="$HOME/.config/bspwm"
+STYLE="default"
 
-rofi_command="rofi -theme $DIR/rofi/themes/screenshot.rasi"
+rofi_command="rofi -theme $STYLE/screenshot.rasi"
 
 # Options
-screen=""
-area=""
-window=""
+screen=" Whole Desktop"
+area=" Selected Area"
+window=" Focused Window"
 
 # Variable passed to rofi
 options="$screen\n$area\n$window"
 
-chosen="$(echo -e "$options" | $rofi_command -p 'Screenshot' -dmenu -selected-row 1)"
+chosen="$(echo -e "$options" | $rofi_command -p 'Take A Shot' -dmenu -selected-row 1)"
 case $chosen in
     $screen)
         sleep 1; scrot 'Screenshot_%Y-%m-%d-%S_$wx$h.png' -e 'mv $f $$(xdg-user-dir PICTURES) ; viewnior $$(xdg-user-dir PICTURES)/$f'
